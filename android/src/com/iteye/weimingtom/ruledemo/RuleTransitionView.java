@@ -8,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.LightingColorFilter;
 import android.graphics.Paint;
+import android.graphics.PaintFlagsDrawFilter;
 import android.graphics.PorterDuff;
 import android.graphics.PorterDuffXfermode;
 import android.util.AttributeSet;
@@ -19,12 +20,17 @@ public class RuleTransitionView extends View {
 	private static final int INCREMENT = 1;
 	private static final int TEXT_SIZE = 16;
 	private static final String THREADHOLD_TEXT = "Threadhold:";
-	private static final int RULE_ID = R.drawable.rule;
+	private static final int RULE_ID = R.drawable.rule_1;
 	
 	private static final int RULE = 0;
 	private static final int RULE_TEMP_BITMAP = 1;
 	private int transitionType = RULE;
 
+	private static final int GLOBAL_FILTER_NONE = 0;
+	private static final int GLOBAL_FILTER_ACCEL = 1;
+	private static final int GLOBAL_FILTER_ANTIALIAS = 2;
+	private int globalFilterType = GLOBAL_FILTER_ANTIALIAS;
+	
 	private AvoidXfermode mode1;
 	private PorterDuffXfermode mode2;
 	private LightingColorFilter[] filters;	
@@ -34,6 +40,8 @@ public class RuleTransitionView extends View {
 	private Bitmap bg1, bg2, rule, mask, bgTemp;
 	private Canvas bgTempCanvas;
 	private int bgWidth, bgHeight;
+	
+	private PaintFlagsDrawFilter accelFilter;
 	
 	public RuleTransitionView(Context context) {
 		super(context);
@@ -58,6 +66,7 @@ public class RuleTransitionView extends View {
         paint.setDither(true);
         paint.setTextSize(TEXT_SIZE);
         paint.setColor(Color.RED);
+        paint.setFilterBitmap(true); // TODO: Bitmap anti-alias
         
 		if (transitionType == RULE_TEMP_BITMAP) {
 	        bgTemp = makeMask(bgWidth, bgHeight);
@@ -71,6 +80,17 @@ public class RuleTransitionView extends View {
         for (int i = 0; i < 256; i++) {
         	filters[i] = new LightingColorFilter(0xFFFFFFFF, (i << 16) | (i << 8) | (i));
         }
+        
+        if (globalFilterType == GLOBAL_FILTER_ACCEL) {
+            accelFilter = new PaintFlagsDrawFilter(
+    	            0, Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG|Paint.DITHER_FLAG);  
+        } else if (globalFilterType == GLOBAL_FILTER_ANTIALIAS) {
+            accelFilter = new PaintFlagsDrawFilter(
+    	            Paint.ANTI_ALIAS_FLAG|Paint.FILTER_BITMAP_FLAG|Paint.DITHER_FLAG, 0);          	
+        } else {
+        	accelFilter = null;
+        }
+
     }
 	
 	@Override
@@ -85,7 +105,7 @@ public class RuleTransitionView extends View {
         }
         
         canvas.drawColor(Color.WHITE);
-        
+        canvas.setDrawFilter(accelFilter);
         if (transitionType == RULE) {
         	draw1(canvas);
         } else if (transitionType == RULE_TEMP_BITMAP) {
