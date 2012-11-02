@@ -95,7 +95,8 @@ public class RuleTransitionView extends View {
 	
 	@Override
 	public void onDraw(Canvas canvas) {
-        long time = System.currentTimeMillis() - lastTick;
+        final long ct = System.currentTimeMillis();
+        final long time = ct - lastTick;
         if (time >= DELAY) {
         	lastTick = System.currentTimeMillis();
         	threadhold += INCREMENT;
@@ -115,7 +116,9 @@ public class RuleTransitionView extends View {
         if (SHOW_THREADHOLD) {
         	canvas.drawText(THREADHOLD_TEXT + this.threadhold, 0, -paint.ascent(), paint);
         }
-        postInvalidateDelayed(DELAY);
+        final long drawTime = System.currentTimeMillis() - ct;
+        final long realDelay = DELAY > drawTime ? DELAY - drawTime : 0;
+        postInvalidateDelayed(realDelay);
 	}
     
 	private void draw1(Canvas canvas) {

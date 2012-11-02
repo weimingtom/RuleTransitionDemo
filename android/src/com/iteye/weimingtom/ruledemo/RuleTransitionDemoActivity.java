@@ -1,6 +1,9 @@
 package com.iteye.weimingtom.ruledemo;
 
+import com.jacp.tone.ImageToneActivity;
+
 import android.app.Activity;
+import android.content.Intent;
 import android.graphics.PixelFormat;
 import android.os.Bundle;
 import android.view.View;
@@ -33,6 +36,20 @@ public class RuleTransitionDemoActivity extends Activity {
 				showView(R.id.cut);
 			}
         });
+        this.findViewById(R.id.buttonTone).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(RuleTransitionDemoActivity.this, 
+						ImageToneActivity.class));
+			}
+        });
+        this.findViewById(R.id.buttonText1).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(RuleTransitionDemoActivity.this, 
+						TextViewTest.class));
+			}
+        });        
     }
     
     public void hideTitle() {
