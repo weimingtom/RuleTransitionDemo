@@ -49,7 +49,14 @@ public class RuleTransitionDemoActivity extends Activity {
 				startActivity(new Intent(RuleTransitionDemoActivity.this, 
 						TextViewTest.class));
 			}
-        });        
+        });
+        this.findViewById(R.id.buttonGLES2).setOnClickListener(new OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				startActivity(new Intent(RuleTransitionDemoActivity.this, 
+						RuleTransitionGLES2DemoActivity.class));
+			}
+        });
     }
     
     public void hideTitle() {

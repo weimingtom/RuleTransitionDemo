@@ -10,28 +10,44 @@
         android:layout_height="wrap_content" >
         <Button
             android:id="@+id/buttonRule"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="rule" />
 
         <Button
             android:id="@+id/buttonCut"
-            android:layout_width="wrap_content"
+			android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="cut" />
         
         <Button
             android:id="@+id/buttonTone"
-            android:layout_width="wrap_content"
+			android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="tone" />
 
         <Button
             android:id="@+id/buttonText1"
-            android:layout_width="wrap_content"
+			android:layout_width="0dp"
+            android:layout_weight="1"
             android:layout_height="wrap_content"
             android:text="text1" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" >
+        <Button
+            android:id="@+id/buttonGLES2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="gles2" />
+    </LinearLayout>
+    
     <FrameLayout
         android:id="@+id/frameLayout1"
         android:layout_width="match_parent"

@@ -25,6 +25,10 @@
             android:name=".TextViewTest"
             android:label="@string/app_name">
         </activity>
+        <activity 
+            android:name=".RuleTransitionGLES2DemoActivity"
+            android:label="@string/app_name">    
+        </activity>
         
     </application>
 </manifest>

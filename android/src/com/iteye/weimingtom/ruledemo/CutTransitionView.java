@@ -28,7 +28,7 @@ public class CutTransitionView extends View {
 	
 	private Rect srcRect;
 	private Rect dstRect;
-	BlurMaskFilter maskfilter;
+	private BlurMaskFilter maskfilter;
 	
 	public CutTransitionView(Context context) {
 		super(context);
@@ -53,11 +53,12 @@ public class CutTransitionView extends View {
         paint.setDither(true);
         paint.setTextSize(TEXT_SIZE);
         paint.setColor(Color.RED);
+        paint.setFilterBitmap(true);
         
     	srcRect = new Rect();
     	dstRect = new Rect();
     	if (USE_BLUR) {
-    		maskfilter = new BlurMaskFilter(BLUR_RADIUS, BlurMaskFilter.Blur.OUTER);
+    		maskfilter = new BlurMaskFilter(BLUR_RADIUS, BlurMaskFilter.Blur.SOLID);
     	}
 	}
 	
