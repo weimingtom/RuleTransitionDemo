@@ -1,7 +1,16 @@
 A simple rule transition demo, using AS3 and Android.
 
+
+!!!!!NOTE:!!!!!
+
+AvoidXfermode is deprecated since API 16, please use gles 2.0 or other methods.
+
+!!!!!NOTE:!!!!!
+
+
 NOTE:
 1. as3/ & android/ : Demo sources.
 2. c/ : Rule images generater (only for test).
 3. For rule images, You can use translib2.lzh instead. (See http://kikyou.info/tvp/) 
 4. Rule images should be .png format, for lossless compression.
+
